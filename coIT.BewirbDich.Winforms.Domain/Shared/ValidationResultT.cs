@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.Shared;
+﻿namespace coIT.BewirbDich.Domain.Shared;
 
 public sealed class ValidationResult<TValue> : Result<TValue>, IValidationResult
 {

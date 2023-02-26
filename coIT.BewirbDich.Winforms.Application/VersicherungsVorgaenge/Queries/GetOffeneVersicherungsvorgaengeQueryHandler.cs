@@ -1,9 +1,9 @@
-﻿using coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
-using coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries.ExtensionMethods;
-using coIT.BewirbDich.Winforms.Domain.Repository;
-using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Application.Abstractions.Messaging;
+using coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries.ExtensionMethods;
+using coIT.BewirbDich.Domain.Repository;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries;
 
 internal sealed partial class GetOffeneVersicherungsVorgaengeQueryHandler
     : IQueryHandler<GetOffeneVersicherungsVorgaengeQuery, VersicherungsVorgaengeResponse>

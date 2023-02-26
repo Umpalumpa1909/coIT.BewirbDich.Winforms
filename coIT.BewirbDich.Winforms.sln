@@ -4,15 +4,15 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Winforms.UI", "coIT.BewirbDich.Winforms.UI\coIT.BewirbDich.Winforms.UI.csproj", "{A645C868-D73F-4F49-9240-1A2FC925C7F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Winforms.Domain", "coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Winforms.Domain.csproj", "{5DCE75FD-0C3C-4139-9A68-5B8C81C4E8CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Domain", "coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Domain.csproj", "{5DCE75FD-0C3C-4139-9A68-5B8C81C4E8CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Winforms.Infrastructure", "coIT.BewirbDich.Winforms.Infrastructure\coIT.BewirbDich.Winforms.Infrastructure.csproj", "{52A9F606-149A-44ED-9F22-B29AD1ED1D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Infrastructure", "coIT.BewirbDich.Winforms.Infrastructure\coIT.BewirbDich.Infrastructure.csproj", "{52A9F606-149A-44ED-9F22-B29AD1ED1D7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Winforms.Api", "coIT.BewirbDich.Winforms.Api\coIT.BewirbDich.Winforms.Api.csproj", "{4780ECB5-F636-4147-B82E-93D97716099F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Api", "coIT.BewirbDich.Winforms.Api\coIT.BewirbDich.Api.csproj", "{4780ECB5-F636-4147-B82E-93D97716099F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Persistence", "coIT.BewirbDich.Persistence\coIT.BewirbDich.Persistence.csproj", "{9DF0FA03-8B76-4B37-9180-42E93F4B1786}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Winforms.Application", "coIT.BewirbDich.Winforms.Application\coIT.BewirbDich.Winforms.Application.csproj", "{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coIT.BewirbDich.Application", "coIT.BewirbDich.Winforms.Application\coIT.BewirbDich.Application.csproj", "{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{618AB8A6-F577-4CB3-904F-7EDA7B490383}"
 EndProject

@@ -1,5 +1,5 @@
-﻿using coIT.BewirbDich.Persistence.Outbox;
-using coIT.BewirbDich.Winforms.Domain.Entities;
+﻿using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Persistence.Outbox;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;

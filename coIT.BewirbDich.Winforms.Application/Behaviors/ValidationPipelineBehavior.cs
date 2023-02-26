@@ -1,8 +1,8 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.Shared;
 using FluentValidation;
 using MediatR;
 
-namespace coIT.BewirbDich.Winforms.Application.Behaviors;
+namespace coIT.BewirbDich.Application.Behaviors;
 
 public class ValidationPipelineBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>

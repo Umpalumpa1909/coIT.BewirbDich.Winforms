@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Enums;
+﻿using coIT.BewirbDich.Domain.Enums;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries;
 
 public sealed record VersicherungsVorgangResponse(Guid Id,
                                                   VorgangsStatus VorgangsStatus,

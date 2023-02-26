@@ -1,4 +1,4 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Repository;
+﻿using coIT.BewirbDich.Domain.Repository;
 
 namespace coIT.BewirbDich.Persistence;
 

@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Net;
+﻿using System.Net;
 
-namespace coIT.BewirbDich.Winforms.Api.Middleware;
+namespace coIT.BewirbDich.Api.Middleware;
 
 public class GlobalExceptionHandlingMiddleware
 {

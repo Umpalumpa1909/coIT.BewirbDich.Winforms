@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace coIT.BewirbDich.Winforms.Application;
+namespace coIT.BewirbDich.Application;
 
 public static class AssemblyReference
 {

@@ -1,9 +1,9 @@
-﻿using coIT.BewirbDich.Winforms.Application.Abstractions;
-using coIT.BewirbDich.Winforms.Domain.Entities;
-using coIT.BewirbDich.Winforms.Domain.Enums;
-using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Application.Abstractions;
+using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Domain.Enums;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Infrastructure.Services;
+namespace coIT.BewirbDich.Infrastructure.Services;
 
 internal class CreditReformRequestService : ICreditReformRequestService
 {

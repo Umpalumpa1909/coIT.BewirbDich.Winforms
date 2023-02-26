@@ -1,9 +1,9 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Enums;
-using coIT.BewirbDich.Winforms.Domain.Errors;
-using coIT.BewirbDich.Winforms.Domain.Primitives;
-using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.Enums;
+using coIT.BewirbDich.Domain.Errors;
+using coIT.BewirbDich.Domain.Primitives;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Domain.Entities;
+namespace coIT.BewirbDich.Domain.Entities;
 
 public sealed class Angebotsanfrage : Entity
 {
@@ -111,7 +111,7 @@ public sealed class Angebotsanfrage : Entity
             // Hier bin ich mir nicht sicher ob die Berechnung verändert werden soll als Aufgabe
             // habe es so verändert das der Prozentwert genutzt wird.
             //return beitrag * 1.0m + this.ZusatzschutzAufschlag / 100.0m;
-            return beitrag * this.ZusatzschutzAufschlag / 100.0m;
+            return beitrag * ZusatzschutzAufschlag / 100.0m;
         }
         return 0m;
     }
@@ -150,7 +150,7 @@ public sealed class Angebotsanfrage : Entity
 
     private VersicherungsKonditionen BerechneHaushaltssumme()
     {
-        var berechnungbasis = (decimal)Math.Log10((double)this.Versicherungssumme);
+        var berechnungbasis = (decimal)Math.Log10((double)Versicherungssumme);
         var beitrag = 1.0m * berechnungbasis + 100m;
         return ErstelleDokument(berechnungbasis, beitrag);
     }

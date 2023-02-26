@@ -1,8 +1,8 @@
-﻿using coIT.BewirbDich.Winforms.Domain.DomainEvents;
-using coIT.BewirbDich.Winforms.Domain.Enums;
-using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.DomainEvents;
+using coIT.BewirbDich.Domain.Enums;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Domain.Entities;
+namespace coIT.BewirbDich.Domain.Entities;
 
 public class VersicherungsVorgang : AggregateRoot
 {
@@ -38,7 +38,7 @@ public class VersicherungsVorgang : AggregateRoot
         if (VorgangsStatus == VorgangsStatus.Angebot)
         {
             VorgangsStatus = VorgangsStatus.Bestellung;
-            RaiseDomainEvent(new AngebotAkzeptiertDomainEvent(Guid.NewGuid(), this.Id));
+            RaiseDomainEvent(new AngebotAkzeptiertDomainEvent(Guid.NewGuid(), Id));
             return Result.Success();
         }
         return Result.Failure(new Error("VersicherungsVorgang.BestellungAusloesen", "Nur für Angebote kann eine Bestellung ausgelöst werden"));

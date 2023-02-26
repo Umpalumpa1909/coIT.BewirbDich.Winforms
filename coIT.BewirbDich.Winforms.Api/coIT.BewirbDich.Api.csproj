@@ -21,9 +21,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\coIT.BewirbDich.Persistence\coIT.BewirbDich.Persistence.csproj" />
-    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Application\coIT.BewirbDich.Winforms.Application.csproj" />
-    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Winforms.Domain.csproj" />
-    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Infrastructure\coIT.BewirbDich.Winforms.Infrastructure.csproj" />
+    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Application\coIT.BewirbDich.Application.csproj" />
+    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Domain.csproj" />
+    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Infrastructure\coIT.BewirbDich.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

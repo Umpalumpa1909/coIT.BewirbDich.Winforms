@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Primitives;
+﻿using coIT.BewirbDich.Domain.Primitives;
 
-namespace coIT.BewirbDich.Winforms.Domain.Entities;
+namespace coIT.BewirbDich.Domain.Entities;
 
 public sealed class VersicherungsKonditionen : Entity
 {

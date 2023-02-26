@@ -1,10 +1,10 @@
+using coIT.BewirbDich.Api.Middleware;
+using coIT.BewirbDich.Application.Behaviors;
+using coIT.BewirbDich.Infrastructure.BackgroundJobs;
+using coIT.BewirbDich.Infrastructure.Idempotence;
 using coIT.BewirbDich.Persistence;
 using coIT.BewirbDich.Persistence.Interceptors;
-using coIT.BewirbDich.Winforms.Api.Middleware;
-using coIT.BewirbDich.Winforms.Application.Behaviors;
-using coIT.BewirbDich.Winforms.Infrastructure.BackgroundJobs;
 using FluentValidation;
-using Gatherly.Infrastructure.Idempotence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -34,21 +34,21 @@ builder
     .Scan(
         selector => selector
             .FromAssemblies(
-                coIT.BewirbDich.Winforms.Infrastructure.AssemblyReference.Assembly,
+                coIT.BewirbDich.Infrastructure.AssemblyReference.Assembly,
                 coIT.BewirbDich.Persistence.AssemblyReference.Assembly)
             .AddClasses(false)
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 
 builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
-var validatorAssemblies = new List<Assembly>() { coIT.BewirbDich.Winforms.Application.AssemblyReference.Assembly };
+var validatorAssemblies = new List<Assembly>() { coIT.BewirbDich.Application.AssemblyReference.Assembly };
 builder.Services.AddValidatorsFromAssemblies(validatorAssemblies, includeInternalTypes: true);
 
 //string connectionString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddMediatR(
     (sc) =>
     {
-        sc.RegisterServicesFromAssemblies(coIT.BewirbDich.Winforms.Application.AssemblyReference.Assembly);
+        sc.RegisterServicesFromAssemblies(coIT.BewirbDich.Application.AssemblyReference.Assembly);
         sc.Lifetime = ServiceLifetime.Scoped;
     });
 

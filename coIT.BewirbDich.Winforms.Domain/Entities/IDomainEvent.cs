@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace coIT.BewirbDich.Winforms.Domain.Entities;
+namespace coIT.BewirbDich.Domain.Entities;
 
 public interface IDomainEvent : INotification
 {

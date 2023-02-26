@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Commands;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 
 internal class CreateVersicherungsVorgangCommandValidator : AbstractValidator<CreateVersicherungsVorgangCommand>
 {

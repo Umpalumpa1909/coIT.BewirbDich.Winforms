@@ -1,8 +1,8 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Entities;
-using coIT.BewirbDich.Winforms.Domain.Enums;
-using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Domain.Enums;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Application.Abstractions;
+namespace coIT.BewirbDich.Application.Abstractions;
 
 public interface ICreditReformRequestService
 {

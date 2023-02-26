@@ -1,7 +1,5 @@
-﻿using coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
-using coIT.BewirbDich.Winforms.Domain.Enums;
-using MediatR;
+﻿using coIT.BewirbDich.Application.Abstractions.Messaging;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Commands;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 
 public record AngebotAkzeptierenCommand(Guid Id) : ICommand;

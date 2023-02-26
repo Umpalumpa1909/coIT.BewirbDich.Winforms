@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.DomainEvents;
+﻿namespace coIT.BewirbDich.Domain.DomainEvents;
 
 public sealed record AngebotAkzeptiertDomainEvent(
     Guid Id,

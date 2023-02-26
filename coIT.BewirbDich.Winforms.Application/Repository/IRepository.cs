@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Entities;
+﻿using coIT.BewirbDich.Domain.Entities;
 
-namespace coIT.BewirbDich.Winforms.Application.Repository;
+namespace coIT.BewirbDich.Application.Repository;
 
 public interface IRepository
 {

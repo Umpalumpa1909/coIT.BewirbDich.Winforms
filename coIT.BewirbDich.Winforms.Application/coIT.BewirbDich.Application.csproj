@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Winforms.Domain.csproj" />
+    <ProjectReference Include="..\coIT.BewirbDich.Winforms.Domain\coIT.BewirbDich.Domain.csproj" />
   </ItemGroup>
 
 </Project>

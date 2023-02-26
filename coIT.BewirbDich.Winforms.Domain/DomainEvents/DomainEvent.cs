@@ -1,5 +1,5 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Entities;
+﻿using coIT.BewirbDich.Domain.Entities;
 
-namespace coIT.BewirbDich.Winforms.Domain.DomainEvents;
+namespace coIT.BewirbDich.Domain.DomainEvents;
 
 public abstract record DomainEvent(Guid Id) : IDomainEvent;

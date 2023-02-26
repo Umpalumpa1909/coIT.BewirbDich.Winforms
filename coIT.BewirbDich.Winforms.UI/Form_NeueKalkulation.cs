@@ -4,7 +4,7 @@ namespace coIT.BewirbDich.Winforms.UI;
 
 public partial class Form_NeueKalkulation : Form
 {
-    public CreateVersicherungsVorgangCommand createVersicherungsVorgangCommand { get; set; }
+    public CreateVersicherungsVorgangCommand? createVersicherungsVorgangCommand { get; set; }
 
     public Form_NeueKalkulation()
     {

@@ -1,7 +1,6 @@
-﻿using coIT.BewirbDich.Persistence.Constants;
-using coIT.BewirbDich.Winforms.Domain.Entities;
+﻿using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Persistence.Constants;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace coIT.BewirbDich.Persistence.Configurations;

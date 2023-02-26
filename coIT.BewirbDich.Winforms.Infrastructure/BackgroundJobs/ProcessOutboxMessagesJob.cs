@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Persistence;
+﻿using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Persistence;
 using coIT.BewirbDich.Persistence.Outbox;
-using coIT.BewirbDich.Winforms.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -8,7 +8,7 @@ using Polly;
 using Polly.Retry;
 using Quartz;
 
-namespace coIT.BewirbDich.Winforms.Infrastructure.BackgroundJobs;
+namespace coIT.BewirbDich.Infrastructure.BackgroundJobs;
 
 [DisallowConcurrentExecution]
 public class ProcessOutboxMessagesJob : IJob

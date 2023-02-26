@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.Primitives
+﻿namespace coIT.BewirbDich.Domain.Primitives
 {
     public abstract class Entity : IEquatable<Entity>
     {

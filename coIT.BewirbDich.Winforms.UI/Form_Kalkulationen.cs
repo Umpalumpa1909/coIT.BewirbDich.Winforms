@@ -132,7 +132,7 @@ public partial class Form_Kalkulationen : Form
         return kalkulation;
     }
 
-    public async void LadeVersicherungsVorgaenge()
+    private async Task LadeVersicherungsVorgaenge()
     {
         var result = await client.GetOffeneVersicherungsVorgaengeAsync();
 
@@ -163,7 +163,7 @@ public partial class Form_Kalkulationen : Form
 
     private async void Form1_Load(object sender, EventArgs e)
     {
-        LadeVersicherungsVorgaenge();
+        await LadeVersicherungsVorgaenge();
     }
 
     private async void ctrl_AngebotLoeschen_Click(object sender, EventArgs e)
@@ -184,9 +184,9 @@ public partial class Form_Kalkulationen : Form
         }
     }
 
-    private void ctrl_Aktualisieren_Click(object sender, EventArgs e)
+    private async void ctrl_Aktualisieren_Click(object sender, EventArgs e)
     {
-        LadeVersicherungsVorgaenge();
+        await LadeVersicherungsVorgaenge();
     }
 
     private List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge

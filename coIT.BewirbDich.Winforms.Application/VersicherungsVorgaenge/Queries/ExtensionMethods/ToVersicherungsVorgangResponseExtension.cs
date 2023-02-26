@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Entities;
+﻿using coIT.BewirbDich.Domain.Entities;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries.ExtensionMethods;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries.ExtensionMethods;
 
 public static class ToVersicherungsVorgangResponseExtension
 {

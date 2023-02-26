@@ -3,7 +3,6 @@
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
 
 public class EnumerationToEnumSchemaFilter : ISchemaFilter
 {

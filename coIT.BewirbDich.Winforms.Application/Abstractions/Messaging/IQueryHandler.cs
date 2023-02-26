@@ -1,7 +1,7 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.Shared;
 using MediatR;
 
-namespace coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
+namespace coIT.BewirbDich.Application.Abstractions.Messaging;
 
 public interface IQueryHandler<TQuery, TResponse>
     : IRequestHandler<TQuery, Result<TResponse>>

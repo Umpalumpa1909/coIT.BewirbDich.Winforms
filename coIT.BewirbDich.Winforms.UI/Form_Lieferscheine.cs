@@ -15,7 +15,7 @@ public partial class Form_Lieferscheine : Form
 
     public List<VersicherungsVorgangResponse> AbgeschlosseneVersicherungsvorgaenge { get; }
 
-    private async void Form1_Load(object sender, EventArgs e)
+    private void Form1_Load(object sender, EventArgs e)
     {
         lieferscheine = new BindingSource
         {

@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.Enums;
+﻿namespace coIT.BewirbDich.Domain.Enums;
 
 public enum VorgangsStatus
 {

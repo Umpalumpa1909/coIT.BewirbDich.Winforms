@@ -1,9 +1,9 @@
-﻿using coIT.BewirbDich.Winforms.Application.Abstractions;
-using coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
-using coIT.BewirbDich.Winforms.Domain.DomainEvents;
-using coIT.BewirbDich.Winforms.Domain.Repository;
+﻿using coIT.BewirbDich.Application.Abstractions;
+using coIT.BewirbDich.Application.Abstractions.Messaging;
+using coIT.BewirbDich.Domain.DomainEvents;
+using coIT.BewirbDich.Domain.Repository;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.EventHandler;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.EventHandler;
 
 internal sealed class AngebotAkzeptiertDomainEventHandler
     : IDomainEventHandler<AngebotAkzeptiertDomainEvent>

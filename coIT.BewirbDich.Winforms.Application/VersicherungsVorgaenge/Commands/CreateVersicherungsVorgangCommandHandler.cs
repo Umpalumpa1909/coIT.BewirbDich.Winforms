@@ -1,10 +1,9 @@
-﻿using coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
-using coIT.BewirbDich.Winforms.Domain.Entities;
-using coIT.BewirbDich.Winforms.Domain.Repository;
-using coIT.BewirbDich.Winforms.Domain.Shared;
-using MediatR;
+﻿using coIT.BewirbDich.Application.Abstractions.Messaging;
+using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Domain.Repository;
+using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Commands;
+namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 
 internal sealed class CreateVersicherungsVorgangCommandHandler : ICommandHandler<CreateVersicherungsVorgangCommand, Guid>
 {

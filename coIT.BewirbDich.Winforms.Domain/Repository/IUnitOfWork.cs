@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.Repository;
+﻿namespace coIT.BewirbDich.Domain.Repository;
 
 public interface IUnitOfWork
 {

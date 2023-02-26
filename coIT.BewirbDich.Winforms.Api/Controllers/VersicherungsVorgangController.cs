@@ -1,10 +1,10 @@
-using coIT.BewirbDich.Winforms.Api.Abstractions;
-using coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Commands;
-using coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries;
+using coIT.BewirbDich.Api.Abstractions;
+using coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
+using coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace coIT.BewirbDich.Winforms.Api.Controllers;
+namespace coIT.BewirbDich.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

@@ -1,4 +1,4 @@
-﻿namespace coIT.BewirbDich.Winforms.Domain.Shared;
+﻿namespace coIT.BewirbDich.Domain.Shared;
 
 public class Error : IEquatable<Error>
 {

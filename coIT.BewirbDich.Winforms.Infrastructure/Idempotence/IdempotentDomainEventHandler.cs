@@ -1,11 +1,11 @@
-﻿using coIT.BewirbDich.Persistence;
+﻿using coIT.BewirbDich.Application.Abstractions.Messaging;
+using coIT.BewirbDich.Domain.Entities;
+using coIT.BewirbDich.Persistence;
 using coIT.BewirbDich.Persistence.Outbox;
-using coIT.BewirbDich.Winforms.Application.Abstractions.Messaging;
-using coIT.BewirbDich.Winforms.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gatherly.Infrastructure.Idempotence;
+namespace coIT.BewirbDich.Infrastructure.Idempotence;
 
 public sealed class IdempotentDomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent

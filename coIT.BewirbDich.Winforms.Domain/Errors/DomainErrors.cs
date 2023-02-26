@@ -1,6 +1,6 @@
-﻿using coIT.BewirbDich.Winforms.Domain.Shared;
+﻿using coIT.BewirbDich.Domain.Shared;
 
-namespace coIT.BewirbDich.Winforms.Domain.Errors;
+namespace coIT.BewirbDich.Domain.Errors;
 
 internal static class DomainErrors
 {
