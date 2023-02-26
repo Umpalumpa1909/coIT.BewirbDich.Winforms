@@ -1,4 +1,5 @@
 ﻿using ApiClient;
+using System.ComponentModel;
 
 namespace coIT.BewirbDich.Winforms.UI;
 
@@ -46,18 +47,13 @@ public partial class Form_NeueKalkulation : Form
         }
     }
 
-    private void ctrl_InkludiereZusatzschutz_CheckedChanged(object sender, EventArgs e)
-    {
-        ctrl_ZusatzschutzAufschlag.Visible = ctrl_InkludiereZusatzschutz.Checked;
-    }
-
     private void ctrl_Kalkuliere_Click(object sender, EventArgs e)
     {
         createVersicherungsVorgangCommand = new CreateVersicherungsVorgangCommand
         {
             Berechnungsart = (Berechnungsart)ctrl_Berechnungsart.SelectedItem,
             Risiko = (Risiko)ctrl_Risiko.SelectedItem,
-            InkludiereZusatzschutz = ctrl_InkludiereZusatzschutz.Checked,
+            Zusatzschutz = (Zusatzschutz)ctrl_ZusatzschutzAufschlag.SelectedItem,
             HatWebshop = ctrl_HatWebshop.Checked,
         };
         switch (createVersicherungsVorgangCommand.Berechnungsart)
@@ -70,10 +66,6 @@ public partial class Form_NeueKalkulation : Form
                 createVersicherungsVorgangCommand.Versicherungssumme = decimal.Parse(ctrl_EinheitBerechnungsGrundlage.Text);
                 break;
         }
-        if (decimal.TryParse(ctrl_ZusatzschutzAufschlag.Text.Replace("%", string.Empty), out var zuschlag))
-            createVersicherungsVorgangCommand.ZusatzschutzAufschlag = zuschlag;
-        else
-            createVersicherungsVorgangCommand.ZusatzschutzAufschlag = 0;
         DialogResult = DialogResult.OK;
         Close();
     }
@@ -82,5 +74,6 @@ public partial class Form_NeueKalkulation : Form
     {
         ctrl_Berechnungsart.DataSource = Enum.GetValues(typeof(Berechnungsart));
         ctrl_Risiko.DataSource = Enum.GetValues(typeof(Risiko));
+        ctrl_ZusatzschutzAufschlag.DataSource = Enum.GetValues(typeof(Zusatzschutz));
     }
 }

@@ -20,16 +20,14 @@ internal sealed class CreateVersicherungsVorgangCommandHandler : ICommandHandler
 
     public async Task<Result<Guid>> Handle(CreateVersicherungsVorgangCommand request, CancellationToken cancellationToken)
     {
-        var angebotsanfrage = new Angebotsanfrage(Guid.NewGuid(),
+        var berechungsParameter = new BerechungsParameter(Guid.NewGuid(),
                                                  request.Versicherungssumme,
-                                                 request.InkludiereZusatzschutz,
-                                                 request.ZusatzschutzAufschlag,
-                                                 request.HatWebshop,
+                                                 request.Zusatzschutz, request.HatWebshop,
                                                  request.AnzahlMitarbeiter,
                                                  request.Risiko,
                                                  request.Berechnungsart);
 
-        var result = VersicherungsVorgang.Create(angebotsanfrage);
+        var result = VersicherungsVorgang.Create(berechungsParameter);
         if (result.IsSuccess)
         {
             versicherungsVorgangRepository.Add(result.Value);

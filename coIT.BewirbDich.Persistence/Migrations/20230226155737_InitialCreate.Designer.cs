@@ -12,8 +12,8 @@ using coIT.BewirbDich.Persistence;
 namespace coIT.BewirbDich.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230226003419_Update")]
-    partial class Update
+    [Migration("20230226155737_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,102 @@ namespace coIT.BewirbDich.Persistence.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.HasSequence("VersicherungsscheinSequence");
+
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.BerechungsParameter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AnzahlMitarbeiter")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Berechnungsart")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HatWebshop")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Risiko")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Versicherungssumme")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Zusatzschutz")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BerechnungsParameter", (string)null);
+                });
+
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.VersicherungsKonditionen", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("GesamtBeitrag")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("GrundBeitrag")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RisikoAufschlag")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("WebShopAufschlag")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ZusatzschutzAufschlag")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ZusatzschutzAufschlagProzent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VersicherungsKondidtionen", (string)null);
+                });
+
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.VersicherungsVorgang", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Erstellungsdatum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VorgangsStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VersicherungsVorgang", (string)null);
+                });
+
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.Versicherungsschein", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Versicherungsnummer")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [VersicherungsscheinSequence]");
+
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Versicherungsnummer"));
+
+                    b.Property<DateTime>("ErstellungsDatum")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id", "Versicherungsnummer");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("Versicherungsschein", (string)null);
+                });
 
             modelBuilder.Entity("coIT.BewirbDich.Persistence.Outbox.OutboxMessage", b =>
                 {
@@ -68,135 +164,36 @@ namespace coIT.BewirbDich.Persistence.Migrations
                     b.ToTable("OutboxMessageConsumers", (string)null);
                 });
 
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.Angebotsanfrage", b =>
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.BerechungsParameter", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AnzahlMitarbeiter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Berechnungsart")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("HatWebshop")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("InkludiereZusatzschutz")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Risiko")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Versicherungssumme")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ZusatzschutzAufschlag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Angebotsanfrage", (string)null);
-                });
-
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsKonditionen", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Berechnungsbasis")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("GesamtBeitrag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("GrundBeitrag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("RisikoAufschlag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("WebShopAufschlag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ZusatzschutzAufschlag")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VersicherungsKondidtionen", (string)null);
-                });
-
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsVorgang", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Erstellungsdatum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("VorgangsStatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VersicherungsVorgang", (string)null);
-                });
-
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.Versicherungsschein", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Versicherungsnummer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [VersicherungsscheinSequence]");
-
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Versicherungsnummer"));
-
-                    b.Property<DateTime>("ErstellungsDatum")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id", "Versicherungsnummer");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.ToTable("Versicherungsschein", (string)null);
-                });
-
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.Angebotsanfrage", b =>
-                {
-                    b.HasOne("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsVorgang", null)
-                        .WithOne("Angebotsanfrage")
-                        .HasForeignKey("coIT.BewirbDich.Winforms.Domain.Entities.Angebotsanfrage", "Id")
+                    b.HasOne("coIT.BewirbDich.Domain.Entities.VersicherungsVorgang", null)
+                        .WithOne("BerechungsParameter")
+                        .HasForeignKey("coIT.BewirbDich.Domain.Entities.BerechungsParameter", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsKonditionen", b =>
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.VersicherungsKonditionen", b =>
                 {
-                    b.HasOne("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsVorgang", null)
+                    b.HasOne("coIT.BewirbDich.Domain.Entities.VersicherungsVorgang", null)
                         .WithOne("VersicherungsKonditionen")
-                        .HasForeignKey("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsKonditionen", "Id")
+                        .HasForeignKey("coIT.BewirbDich.Domain.Entities.VersicherungsKonditionen", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.Versicherungsschein", b =>
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.Versicherungsschein", b =>
                 {
-                    b.HasOne("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsVorgang", null)
+                    b.HasOne("coIT.BewirbDich.Domain.Entities.VersicherungsVorgang", null)
                         .WithOne("Versicherungsschein")
-                        .HasForeignKey("coIT.BewirbDich.Winforms.Domain.Entities.Versicherungsschein", "Id")
+                        .HasForeignKey("coIT.BewirbDich.Domain.Entities.Versicherungsschein", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("coIT.BewirbDich.Winforms.Domain.Entities.VersicherungsVorgang", b =>
+            modelBuilder.Entity("coIT.BewirbDich.Domain.Entities.VersicherungsVorgang", b =>
                 {
-                    b.Navigation("Angebotsanfrage")
+                    b.Navigation("BerechungsParameter")
                         .IsRequired();
 
                     b.Navigation("VersicherungsKonditionen")

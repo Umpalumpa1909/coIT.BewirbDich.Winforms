@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,31 +8,6 @@ namespace coIT.BewirbDich.Persistence.Migrations
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Angebotsanfrage");
-
-            migrationBuilder.DropTable(
-                name: "OutboxMessageConsumers");
-
-            migrationBuilder.DropTable(
-                name: "OutboxMessages");
-
-            migrationBuilder.DropTable(
-                name: "VersicherungsKondidtionen");
-
-            migrationBuilder.DropTable(
-                name: "Versicherungsschein");
-
-            migrationBuilder.DropTable(
-                name: "VersicherungsVorgang");
-
-            migrationBuilder.DropSequence(
-                name: "VersicherungsscheinSequence");
-        }
-
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,11 +31,11 @@ namespace coIT.BewirbDich.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Error = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OccurredOnUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProcessedOnUtc = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Error = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,22 +56,22 @@ namespace coIT.BewirbDich.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Angebotsanfrage",
+                name: "BerechnungsParameter",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Versicherungssumme = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    InkludiereZusatzschutz = table.Column<bool>(type: "bit", nullable: false),
-                    ZusatzschutzAufschlag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AnzahlMitarbeiter = table.Column<int>(type: "int", nullable: false),
+                    Berechnungsart = table.Column<int>(type: "int", nullable: false),
                     HatWebshop = table.Column<bool>(type: "bit", nullable: false),
                     Risiko = table.Column<int>(type: "int", nullable: false),
-                    Berechnungsart = table.Column<int>(type: "int", nullable: false)
+                    Versicherungssumme = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Zusatzschutz = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Angebotsanfrage", x => x.Id);
+                    table.PrimaryKey("PK_BerechnungsParameter", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Angebotsanfrage_VersicherungsVorgang_Id",
+                        name: "FK_BerechnungsParameter_VersicherungsVorgang_Id",
                         column: x => x.Id,
                         principalTable: "VersicherungsVorgang",
                         principalColumn: "Id",
@@ -107,12 +83,12 @@ namespace coIT.BewirbDich.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Berechnungsbasis = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    GesamtBeitrag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GrundBeitrag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RisikoAufschlag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     WebShopAufschlag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ZusatzschutzAufschlag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RisikoAufschlag = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    GesamtBeitrag = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ZusatzschutzAufschlagProzent = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -149,6 +125,31 @@ namespace coIT.BewirbDich.Persistence.Migrations
                 table: "Versicherungsschein",
                 column: "Id",
                 unique: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "BerechnungsParameter");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessageConsumers");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessages");
+
+            migrationBuilder.DropTable(
+                name: "VersicherungsKondidtionen");
+
+            migrationBuilder.DropTable(
+                name: "Versicherungsschein");
+
+            migrationBuilder.DropTable(
+                name: "VersicherungsVorgang");
+
+            migrationBuilder.DropSequence(
+                name: "VersicherungsscheinSequence");
         }
     }
 }

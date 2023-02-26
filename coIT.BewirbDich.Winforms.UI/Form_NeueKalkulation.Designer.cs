@@ -36,9 +36,9 @@
             this.label_EinheitBerechnungsGrundlage = new System.Windows.Forms.Label();
             this.ctrl_Kalkuliere = new System.Windows.Forms.Button();
             this.ctrl_Abbrechen = new System.Windows.Forms.Button();
-            this.ctrl_InkludiereZusatzschutz = new System.Windows.Forms.CheckBox();
             this.ctrl_ZusatzschutzAufschlag = new System.Windows.Forms.ComboBox();
             this.ctrl_HatWebshop = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ctrl_Berechnungsart
@@ -114,17 +114,6 @@
             this.ctrl_Abbrechen.UseVisualStyleBackColor = true;
             this.ctrl_Abbrechen.Click += new System.EventHandler(this.ctrl_Abbrechen_Click);
             // 
-            // ctrl_InkludiereZusatzschutz
-            // 
-            this.ctrl_InkludiereZusatzschutz.AutoSize = true;
-            this.ctrl_InkludiereZusatzschutz.Location = new System.Drawing.Point(21, 152);
-            this.ctrl_InkludiereZusatzschutz.Name = "ctrl_InkludiereZusatzschutz";
-            this.ctrl_InkludiereZusatzschutz.Size = new System.Drawing.Size(94, 19);
-            this.ctrl_InkludiereZusatzschutz.TabIndex = 11;
-            this.ctrl_InkludiereZusatzschutz.Text = "Zusatzschutz";
-            this.ctrl_InkludiereZusatzschutz.UseVisualStyleBackColor = true;
-            this.ctrl_InkludiereZusatzschutz.CheckedChanged += new System.EventHandler(this.ctrl_InkludiereZusatzschutz_CheckedChanged);
-            // 
             // ctrl_ZusatzschutzAufschlag
             // 
             this.ctrl_ZusatzschutzAufschlag.FormattingEnabled = true;
@@ -136,7 +125,6 @@
             this.ctrl_ZusatzschutzAufschlag.Name = "ctrl_ZusatzschutzAufschlag";
             this.ctrl_ZusatzschutzAufschlag.Size = new System.Drawing.Size(231, 23);
             this.ctrl_ZusatzschutzAufschlag.TabIndex = 12;
-            this.ctrl_ZusatzschutzAufschlag.Visible = false;
             // 
             // ctrl_HatWebshop
             // 
@@ -148,14 +136,23 @@
             this.ctrl_HatWebshop.Text = "Hat Webshop";
             this.ctrl_HatWebshop.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 151);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 15);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Zusatzschutz";
+            // 
             // Form_NeueKalkulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 362);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.ctrl_HatWebshop);
             this.Controls.Add(this.ctrl_ZusatzschutzAufschlag);
-            this.Controls.Add(this.ctrl_InkludiereZusatzschutz);
             this.Controls.Add(this.ctrl_Abbrechen);
             this.Controls.Add(this.ctrl_Kalkuliere);
             this.Controls.Add(this.label_EinheitBerechnungsGrundlage);
@@ -185,8 +182,8 @@
         private Label label_EinheitBerechnungsGrundlage;
         private Button ctrl_Kalkuliere;
         private Button ctrl_Abbrechen;
-        private CheckBox ctrl_InkludiereZusatzschutz;
         private ComboBox ctrl_ZusatzschutzAufschlag;
         private CheckBox ctrl_HatWebshop;
+        private Label label3;
     }
 }

@@ -10,8 +10,9 @@ public static class ToVersicherungsVorgangResponseExtension
         {
             return new VersicherungsVorgangResponse(versicherungsVorgang.Id,
            versicherungsVorgang.VorgangsStatus,
-           versicherungsVorgang.Angebotsanfrage.Berechnungsart,
-           versicherungsVorgang.Angebotsanfrage.Versicherungssumme,
+           versicherungsVorgang.BerechungsParameter.Berechnungsart,
+           versicherungsVorgang.BerechungsParameter.GetBerechnungsBasis(),
+           versicherungsVorgang.BerechungsParameter.GetZusatzAufschlagProzent(),
            versicherungsVorgang.VersicherungsKonditionen.GrundBeitrag,
            versicherungsVorgang.VersicherungsKonditionen.RisikoAufschlag,
            versicherungsVorgang.VersicherungsKonditionen.ZusatzschutzAufschlag,
@@ -23,13 +24,14 @@ public static class ToVersicherungsVorgangResponseExtension
 
         return new VersicherungsVorgangResponse(versicherungsVorgang.Id,
             versicherungsVorgang.VorgangsStatus,
-            versicherungsVorgang.Angebotsanfrage.Berechnungsart,
-            versicherungsVorgang.Angebotsanfrage.Versicherungssumme,
+            versicherungsVorgang.BerechungsParameter.Berechnungsart,
+            versicherungsVorgang.BerechungsParameter.GetBerechnungsBasis(),
+            versicherungsVorgang.BerechungsParameter.GetZusatzAufschlagProzent(),
             versicherungsVorgang.VersicherungsKonditionen.GrundBeitrag,
             versicherungsVorgang.VersicherungsKonditionen.RisikoAufschlag,
             versicherungsVorgang.VersicherungsKonditionen.ZusatzschutzAufschlag,
             versicherungsVorgang.VersicherungsKonditionen.WebShopAufschlag,
             versicherungsVorgang.VersicherungsKonditionen.GesamtBeitrag,
-           null, null);
+            null, null);
     }
 }

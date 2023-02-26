@@ -2,7 +2,7 @@
 
 internal static class TableNames
 {
-    internal const string Angebotsanfrage = nameof(Angebotsanfrage);
+    internal const string BerechnungsParameter = nameof(BerechnungsParameter);
     internal const string OutboxMessageConsumers = nameof(OutboxMessageConsumers);
     internal const string OutboxMessages = nameof(OutboxMessages);
     internal const string VersicherungsKondidtionen = nameof(VersicherungsKondidtionen);

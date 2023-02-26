@@ -1,5 +1,6 @@
 ﻿using coIT.BewirbDich.Domain.DomainEvents;
 using coIT.BewirbDich.Domain.Enums;
+using coIT.BewirbDich.Domain.Errors;
 using coIT.BewirbDich.Domain.Shared;
 
 namespace coIT.BewirbDich.Domain.Entities;
@@ -13,18 +14,18 @@ public class VersicherungsVorgang : AggregateRoot
         Erstellungsdatum = DateTime.Now;
     }
 
-    public Angebotsanfrage Angebotsanfrage { get; private set; }
+    public BerechungsParameter BerechungsParameter { get; private set; }
     public DateTime Erstellungsdatum { get; private set; }
     public VersicherungsKonditionen VersicherungsKonditionen { get; private set; }
     public Versicherungsschein? Versicherungsschein { get; private set; } = null;
     public VorgangsStatus VorgangsStatus { get; private set; }
 
-    public static Result<VersicherungsVorgang> Create(Angebotsanfrage angebotsanfrage)
+    public static Result<VersicherungsVorgang> Create(BerechungsParameter berechungsParameter)
     {
         var vorgang = new VersicherungsVorgang(Guid.NewGuid());
 
-        vorgang.Angebotsanfrage = angebotsanfrage;
-        var result = angebotsanfrage.BerechneKonditionen();
+        vorgang.BerechungsParameter = berechungsParameter;
+        var result = berechungsParameter.BerechneKonditionen();
         if (result.IsSuccess)
         {
             vorgang.VersicherungsKonditionen = result.Value;
@@ -46,8 +47,7 @@ public class VersicherungsVorgang : AggregateRoot
                 break;
 
             default:
-                return Result.Failure(new Error("VersicherungsVorgang.AngebotAnnehmen",
-                    $"unbekanntes CreditRating {creditRating}"));
+                return Result.Failure(DomainErrors.VersicherungsVorgang.UnbekanntesCreditRating);
         }
         return Result.Success();
     }
@@ -60,7 +60,7 @@ public class VersicherungsVorgang : AggregateRoot
             RaiseDomainEvent(new AngebotAkzeptiertDomainEvent(Guid.NewGuid(), Id));
             return Result.Success();
         }
-        return Result.Failure(new Error("VersicherungsVorgang.BestellungAusloesen", "Nur für Angebote kann eine Bestellung ausgelöst werden"));
+        return Result.Failure(DomainErrors.VersicherungsVorgang.VersicherungsVorgangStatusUngleichAngebot);
     }
 
     public Result VersicherungsscheinAustellen()
@@ -72,7 +72,6 @@ public class VersicherungsVorgang : AggregateRoot
             return Result.Success();
         }
 
-        return Result.Failure(new Error("VersicherungsVorgang.VersicherungsscheinAustellen",
-            "nur für Versicherungsvorgänge mit Status Versicherungsschein kann ein Versicherungsschein ausgestellt werden"));
+        return Result.Failure(DomainErrors.VersicherungsVorgang.VersicherungsVorgangStatusUngleichAuftragsbestätigung);
     }
 }

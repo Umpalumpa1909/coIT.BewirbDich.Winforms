@@ -5,15 +5,14 @@ namespace coIT.BewirbDich.Domain.Entities;
 public sealed class VersicherungsKonditionen : Entity
 {
     public VersicherungsKonditionen(Guid id,
-                    decimal berechnungsbasis,
                     decimal grundBeitrag,
                     decimal gesamtBeitrag,
                     decimal webShopAufschlag,
                     decimal zusatzschutzAufschlag,
                     decimal risikoAufschlag)
+
         : base(id)
     {
-        Berechnungsbasis = berechnungsbasis;
         GrundBeitrag = grundBeitrag;
         GesamtBeitrag = gesamtBeitrag;
         WebShopAufschlag = webShopAufschlag;
@@ -21,10 +20,10 @@ public sealed class VersicherungsKonditionen : Entity
         RisikoAufschlag = risikoAufschlag;
     }
 
-    public decimal Berechnungsbasis { get; private set; }
     public decimal GesamtBeitrag { get; private set; }
     public decimal GrundBeitrag { get; private set; }
     public decimal RisikoAufschlag { get; private set; }
     public decimal WebShopAufschlag { get; private set; }
     public decimal ZusatzschutzAufschlag { get; private set; }
+    public decimal ZusatzschutzAufschlagProzent { get; private set; }
 }

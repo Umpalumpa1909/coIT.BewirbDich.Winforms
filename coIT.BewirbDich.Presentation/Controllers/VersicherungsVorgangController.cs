@@ -15,6 +15,18 @@ public class VersicherungsVorgangController : ApiController
     {
     }
 
+    [HttpPut("AngebotAkzeptieren/{id:guid}")]
+    public async Task<ActionResult> AngebotAkzeptierenAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new AngebotAkzeptierenCommand(id);
+        var result = await Sender.Send(command, cancellationToken);
+        if (result.IsSuccess)
+        {
+            return Ok();
+        }
+        return BadRequest(result.Error);
+    }
+
     [HttpPost("CreateVersicherungsVorgang")]
     public async Task<ActionResult<Guid>> CreateVersicherungsVorgangAsync(
         [FromBody] CreateVersicherungsVorgangCommand createVersicherungsVorgangCommand, CancellationToken cancellationToken)
@@ -27,16 +39,40 @@ public class VersicherungsVorgangController : ApiController
         return HandleFailure(result);
     }
 
-    [HttpPut("AngebotAkzeptieren/{id:guid}")]
-    public async Task<ActionResult> AngebotAkzeptierenAsync(Guid id, CancellationToken cancellationToken)
+    [HttpGet("GetBeendeteVersicherungsVorgaengeAsync")]
+    public async Task<ActionResult<VersicherungsVorgaengeResponse>> GetBeendeteVersicherungsVorgaengeAsync(GetBeendeteVersicherungsVorgaengeQuery request,
+        CancellationToken cancellationToken)
     {
-        var command = new AngebotAkzeptierenCommand(id);
-        var result = await Sender.Send(command, cancellationToken);
+        var result = await Sender.Send(request, cancellationToken);
         if (result.IsSuccess)
         {
-            return Ok();
+            return Ok(result.Value);
         }
-        return BadRequest(result.Error);
+        return HandleFailure(result);
+    }
+
+    [HttpGet("GetOffeneVersicherungsVorgaenge")]
+    public async Task<ActionResult<VersicherungsVorgaengeResponse>> GetOffeneVersicherungsVorgaengeAsync(CancellationToken cancellationToken)
+    {
+        var query = new GetOffeneVersicherungsVorgaengeQuery();
+        var result = await Sender.Send(query, cancellationToken);
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+        return HandleFailure(result);
+    }
+
+    [HttpGet("GetVersicherungsvorgang/{id:guid}")]
+    public async Task<ActionResult<VersicherungsVorgangResponse>> GetVersicherungsVorgangAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var query = new GetVersicherungsvorgangByIdQuery(id);
+        var result = await Sender.Send(query, cancellationToken);
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+        return HandleFailure(result);
     }
 
     [HttpPut("VersicherungsscheinAustellen/{id:guid}")]
@@ -59,42 +95,6 @@ public class VersicherungsVorgangController : ApiController
         if (result.IsSuccess)
         {
             return Ok();
-        }
-        return HandleFailure(result);
-    }
-
-    [HttpGet("GetOffeneVersicherungsVorgaenge")]
-    public async Task<ActionResult<VersicherungsVorgaengeResponse>> GetOffeneVersicherungsVorgaengeAsync(CancellationToken cancellationToken)
-    {
-        var query = new GetOffeneVersicherungsVorgaengeQuery();
-        var result = await Sender.Send(query, cancellationToken);
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-        return HandleFailure(result);
-    }
-
-    [HttpGet("GetBeendeteVersicherungsVorgaengeAsync")]
-    public async Task<ActionResult<VersicherungsVorgaengeResponse>> GetBeendeteVersicherungsVorgaengeAsync(GetBeendeteVersicherungsVorgaengeQuery request,
-        CancellationToken cancellationToken)
-    {
-        var result = await Sender.Send(request, cancellationToken);
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-        return HandleFailure(result);
-    }
-
-    [HttpGet("GetVersicherungsvorgang/{id:guid}")]
-    public async Task<ActionResult<VersicherungsVorgangResponse>> GetVersicherungsVorgangAsync(Guid id, CancellationToken cancellationToken)
-    {
-        var query = new GetVersicherungsvorgangByIdQuery(id);
-        var result = await Sender.Send(query, cancellationToken);
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
         }
         return HandleFailure(result);
     }

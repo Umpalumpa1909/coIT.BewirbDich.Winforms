@@ -166,14 +166,11 @@ public partial class Form_Kalkulationen : Form
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.Id)].Visible = false;
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.VersicherungsScheinErstellungsdatum)].Visible = false;
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.Versicherungsnummer)].Visible = false;
-
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.GesamtBeitrag)].DefaultCellStyle.Format = "c";
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.GrundBeitrag)].DefaultCellStyle.Format = "c";
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.RisikoAufschlag)].DefaultCellStyle.Format = "c";
-        ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.VersicherungsSumme)].DefaultCellStyle.Format = "c";
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.WebShopAufschlag)].DefaultCellStyle.Format = "c";
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.ZusatzschutzAufschlag)].DefaultCellStyle.Format = "c";
-
         ctrl_ListeKalkulationen.AutoResizeColumns();
         ctrl_ListeKalkulationen.AutoSize = true;
 

@@ -34,7 +34,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
          CancellationToken cancellationToken, int ablfd = 0)
     {
         return await dbContext.Set<VersicherungsVorgang>()
-            .Include(x => x.Angebotsanfrage)
+            .Include(x => x.BerechungsParameter)
             .Include(x => x.VersicherungsKonditionen)
             .Include(x => x.Versicherungsschein)
             .Where(x => x.VorgangsStatus == VorgangsStatus.Lieferschein &&
@@ -45,7 +45,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
     public async Task<VersicherungsVorgang?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         return await dbContext.Set<VersicherungsVorgang>()
-             .Include(x => x.Angebotsanfrage)
+             .Include(x => x.BerechungsParameter)
              .Include(x => x.VersicherungsKonditionen)
              .Include(x => x.Versicherungsschein)
              .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
@@ -54,7 +54,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
     public async Task<IList<VersicherungsVorgang>> GetNichtBeendeteVersicherungsVorgaenge(CancellationToken cancellationToken)
     {
         return await dbContext.Set<VersicherungsVorgang>()
-            .Include(x => x.Angebotsanfrage)
+            .Include(x => x.BerechungsParameter)
             .Include(x => x.VersicherungsKonditionen)
             .Where(x => x.VorgangsStatus != VorgangsStatus.Lieferschein)
             .ToListAsync(cancellationToken);

@@ -12,7 +12,7 @@ internal sealed class VersicherungsVorgangConfiguration : IEntityTypeConfigurati
         builder.HasKey(x => new { x.Id });
         builder.ToTable(TableNames.VersicherungsVorgang);
         builder.HasOne(x => x.VersicherungsKonditionen).WithOne().HasForeignKey<VersicherungsKonditionen>(x => x.Id);
-        builder.HasOne(x => x.Angebotsanfrage).WithOne().HasForeignKey<Angebotsanfrage>(x => x.Id);
+        builder.HasOne(x => x.BerechungsParameter).WithOne().HasForeignKey<BerechungsParameter>(x => x.Id);
         builder.HasOne(x => x.Versicherungsschein).WithOne().HasForeignKey<Versicherungsschein>(x => x.Id);
     }
 }

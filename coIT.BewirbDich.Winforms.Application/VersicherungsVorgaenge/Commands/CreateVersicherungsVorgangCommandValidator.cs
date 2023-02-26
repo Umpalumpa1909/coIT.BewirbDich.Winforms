@@ -8,10 +8,9 @@ internal class CreateVersicherungsVorgangCommandValidator : AbstractValidator<Cr
     {
         RuleFor(x => x.Versicherungssumme).NotNull().GreaterThanOrEqualTo(0);
         RuleFor(x => x.AnzahlMitarbeiter).NotNull().GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ZusatzschutzAufschlag).NotNull().GreaterThanOrEqualTo(0);
+        RuleFor(x => x.Zusatzschutz).NotNull().IsInEnum();
         RuleFor(x => x.Risiko).NotNull().IsInEnum();
         RuleFor(x => x.Berechnungsart).NotNull().IsInEnum();
-        RuleFor(x => x.InkludiereZusatzschutz).NotNull();
         RuleFor(x => x.HatWebshop).NotNull();
     }
 }
