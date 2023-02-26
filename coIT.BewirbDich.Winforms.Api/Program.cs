@@ -44,7 +44,7 @@ builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipeli
 var validatorAssemblies = new List<Assembly>() { coIT.BewirbDich.Winforms.Application.AssemblyReference.Assembly };
 builder.Services.AddValidatorsFromAssemblies(validatorAssemblies, includeInternalTypes: true);
 
-string connectionString = builder.Configuration.GetConnectionString("Database");
+//string connectionString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddMediatR(
     (sc) =>
     {
@@ -59,7 +59,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     (sp, optionsBuilder) =>
     {
         var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessagesInterceptor>();
-        optionsBuilder.UseSqlServer(connectionString)
+        optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
         .AddInterceptors(interceptor);
     });
 

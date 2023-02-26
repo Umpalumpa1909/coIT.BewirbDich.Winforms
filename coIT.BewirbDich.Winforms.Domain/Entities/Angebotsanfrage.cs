@@ -20,6 +20,7 @@ public sealed class Angebotsanfrage : Entity
         InkludiereZusatzschutz = inkludiereZusatzschutz;
         ZusatzschutzAufschlag = zusatzschutzAufschlag;
         HatWebshop = hatWebshop;
+        AnzahlMitarbeiter = anzahlMitarbeiter;
         Risiko = risiko;
         Berechnungsart = berechnungsart;
     }
