@@ -2,7 +2,6 @@
 using coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries.ExtensionMethods;
 using coIT.BewirbDich.Winforms.Domain.Repository;
 using coIT.BewirbDich.Winforms.Domain.Shared;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries;
 
