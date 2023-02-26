@@ -6,8 +6,8 @@ namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 
 internal sealed class VersicherungsscheinAustellenCommandCommandHandler : ICommandHandler<VersicherungsscheinAustellenCommand>
 {
-    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
     private readonly IUnitOfWork unitOfWork;
+    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
 
     public VersicherungsscheinAustellenCommandCommandHandler(
         IVersicherungsVorgangRepository versicherungsVorgangRepository

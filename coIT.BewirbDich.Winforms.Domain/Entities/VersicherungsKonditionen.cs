@@ -22,9 +22,9 @@ public sealed class VersicherungsKonditionen : Entity
     }
 
     public decimal Berechnungsbasis { get; private set; }
+    public decimal GesamtBeitrag { get; private set; }
     public decimal GrundBeitrag { get; private set; }
+    public decimal RisikoAufschlag { get; private set; }
     public decimal WebShopAufschlag { get; private set; }
     public decimal ZusatzschutzAufschlag { get; private set; }
-    public decimal RisikoAufschlag { get; private set; }
-    public decimal GesamtBeitrag { get; private set; }
 }

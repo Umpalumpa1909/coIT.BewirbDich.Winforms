@@ -4,8 +4,8 @@ namespace coIT.BewirbDich.Api.Middleware;
 
 public class GlobalExceptionHandlingMiddleware
 {
-    private readonly RequestDelegate next;
     private readonly ILogger logger;
+    private readonly RequestDelegate next;
 
     public GlobalExceptionHandlingMiddleware(RequestDelegate next, ILogger<GlobalExceptionHandlingMiddleware> logger)
     {

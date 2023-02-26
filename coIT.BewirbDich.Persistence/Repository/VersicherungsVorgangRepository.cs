@@ -29,15 +29,6 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
         return;
     }
 
-    public async Task<VersicherungsVorgang?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
-    {
-        return await dbContext.Set<VersicherungsVorgang>()
-             .Include(x => x.Angebotsanfrage)
-             .Include(x => x.VersicherungsKonditionen)
-             .Include(x => x.Versicherungsschein)
-             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-    }
-
     public async Task<IList<VersicherungsVorgang>> GetBeendeteVersicherungsVorgaenge
         (
          CancellationToken cancellationToken, int ablfd = 0)
@@ -49,6 +40,15 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
             .Where(x => x.VorgangsStatus == VorgangsStatus.Lieferschein &&
              x.Versicherungsschein!.Versicherungsnummer! > ablfd)
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<VersicherungsVorgang?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await dbContext.Set<VersicherungsVorgang>()
+             .Include(x => x.Angebotsanfrage)
+             .Include(x => x.VersicherungsKonditionen)
+             .Include(x => x.Versicherungsschein)
+             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task<IList<VersicherungsVorgang>> GetNichtBeendeteVersicherungsVorgaenge(CancellationToken cancellationToken)

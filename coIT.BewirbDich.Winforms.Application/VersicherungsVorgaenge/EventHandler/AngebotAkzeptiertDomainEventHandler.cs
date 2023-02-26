@@ -8,9 +8,9 @@ namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.EventHandler;
 internal sealed class AngebotAkzeptiertDomainEventHandler
     : IDomainEventHandler<AngebotAkzeptiertDomainEvent>
 {
-    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
     private readonly ICreditReformRequestService creditReformRequestService;
     private readonly IUnitOfWork unitOfWork;
+    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
 
     public AngebotAkzeptiertDomainEventHandler(IVersicherungsVorgangRepository versicherungsVorgangRepository,
         ICreditReformRequestService creditReformRequestService,

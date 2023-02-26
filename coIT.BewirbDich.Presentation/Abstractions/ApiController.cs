@@ -1,8 +1,9 @@
 ﻿using coIT.BewirbDich.Domain.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace coIT.BewirbDich.Api.Abstractions;
+namespace coIT.BewirbDich.Presentation.Abstractions;
 
 [ApiController]
 public abstract class ApiController : ControllerBase

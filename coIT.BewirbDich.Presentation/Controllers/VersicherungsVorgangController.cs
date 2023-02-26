@@ -1,10 +1,10 @@
-using coIT.BewirbDich.Api.Abstractions;
 using coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 using coIT.BewirbDich.Application.VersicherungsVorgaenge.Queries;
+using coIT.BewirbDich.Presentation.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace coIT.BewirbDich.Api.Controllers;
+namespace coIT.BewirbDich.Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -27,7 +27,7 @@ public class VersicherungsVorgangController : ApiController
         return HandleFailure(result);
     }
 
-    [HttpPut("AngebotAkzeptieren/{id}")]
+    [HttpPut("AngebotAkzeptieren/{id:guid}")]
     public async Task<ActionResult> AngebotAkzeptierenAsync(Guid id, CancellationToken cancellationToken)
     {
         var command = new AngebotAkzeptierenCommand(id);
@@ -39,7 +39,7 @@ public class VersicherungsVorgangController : ApiController
         return BadRequest(result.Error);
     }
 
-    [HttpPut("VersicherungsscheinAustellen/{id}")]
+    [HttpPut("VersicherungsscheinAustellen/{id:guid}")]
     public async Task<IActionResult> VersicherungsscheinAustellenAsync(Guid id, CancellationToken cancellationToken)
     {
         var command = new VersicherungsscheinAustellenCommand(id);
@@ -51,7 +51,7 @@ public class VersicherungsVorgangController : ApiController
         return HandleFailure(result);
     }
 
-    [HttpDelete("VersicherungsVorgangLoeschen/{id}")]
+    [HttpDelete("VersicherungsVorgangLoeschen/{id:guid}")]
     public async Task<IActionResult> VersicherungsVorgangLoeschenAsnyc(Guid id, CancellationToken cancellationToken)
     {
         var command = new VersicherungsVorgangLoeschenCommand(id);
@@ -87,7 +87,7 @@ public class VersicherungsVorgangController : ApiController
         return HandleFailure(result);
     }
 
-    [HttpGet("GetVersicherungsvorgang/{id}")]
+    [HttpGet("GetVersicherungsvorgang/{id:guid}")]
     public async Task<ActionResult<VersicherungsVorgangResponse>> GetVersicherungsVorgangAsync(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetVersicherungsvorgangByIdQuery(id);

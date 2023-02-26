@@ -4,8 +4,8 @@ namespace coIT.BewirbDich.Winforms.UI;
 
 public partial class Form_Lieferscheine : Form
 {
-    private BindingSource lieferscheine;
     private readonly List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge;
+    private BindingSource lieferscheine;
 
     public Form_Lieferscheine(List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge)
     {

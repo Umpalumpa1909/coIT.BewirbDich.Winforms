@@ -10,8 +10,8 @@ namespace coIT.BewirbDich.Infrastructure.Idempotence;
 public sealed class IdempotentDomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent
 {
-    private readonly INotificationHandler<TDomainEvent> _decorated;
     private readonly ApplicationDbContext _dbContext;
+    private readonly INotificationHandler<TDomainEvent> _decorated;
 
     public IdempotentDomainEventHandler(
         INotificationHandler<TDomainEvent> decorated,

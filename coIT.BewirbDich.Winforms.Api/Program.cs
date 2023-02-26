@@ -49,6 +49,7 @@ builder.Services.AddMediatR(
     (sc) =>
     {
         sc.RegisterServicesFromAssemblies(coIT.BewirbDich.Application.AssemblyReference.Assembly);
+
         sc.Lifetime = ServiceLifetime.Scoped;
     });
 
@@ -58,7 +59,7 @@ builder.Services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptor>();
 builder.Services.AddDbContext<ApplicationDbContext>(
     (sp, optionsBuilder) =>
     {
-        var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessagesInterceptor>();
+        var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessagesInterceptor>()!;
         optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
         .AddInterceptors(interceptor);
     });
@@ -80,6 +81,10 @@ builder.Services.AddQuartz(configure =>
     configure.UseMicrosoftDependencyInjectionJobFactory();
 });
 builder.Services.AddQuartzHostedService();
+builder
+    .Services
+    .AddControllers()
+    .AddApplicationPart(coIT.BewirbDich.Presentation.AssemblyReference.Assembly);
 
 var app = builder.Build();
 

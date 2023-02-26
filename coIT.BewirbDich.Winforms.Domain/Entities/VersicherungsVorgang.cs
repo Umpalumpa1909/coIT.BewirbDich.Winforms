@@ -13,11 +13,11 @@ public class VersicherungsVorgang : AggregateRoot
         Erstellungsdatum = DateTime.Now;
     }
 
-    public DateTime Erstellungsdatum { get; private set; }
     public Angebotsanfrage Angebotsanfrage { get; private set; }
+    public DateTime Erstellungsdatum { get; private set; }
     public VersicherungsKonditionen VersicherungsKonditionen { get; private set; }
-    public VorgangsStatus VorgangsStatus { get; private set; }
     public Versicherungsschein? Versicherungsschein { get; private set; } = null;
+    public VorgangsStatus VorgangsStatus { get; private set; }
 
     public static Result<VersicherungsVorgang> Create(Angebotsanfrage angebotsanfrage)
     {
@@ -31,17 +31,6 @@ public class VersicherungsVorgang : AggregateRoot
             return vorgang;
         }
         return Result.Failure<VersicherungsVorgang>(result.Error);
-    }
-
-    public Result BestellungAusloesen()
-    {
-        if (VorgangsStatus == VorgangsStatus.Angebot)
-        {
-            VorgangsStatus = VorgangsStatus.Bestellung;
-            RaiseDomainEvent(new AngebotAkzeptiertDomainEvent(Guid.NewGuid(), Id));
-            return Result.Success();
-        }
-        return Result.Failure(new Error("VersicherungsVorgang.BestellungAusloesen", "Nur für Angebote kann eine Bestellung ausgelöst werden"));
     }
 
     public Result AngebotAnnehmen(CreditRating creditRating)
@@ -61,6 +50,17 @@ public class VersicherungsVorgang : AggregateRoot
                     $"unbekanntes CreditRating {creditRating}"));
         }
         return Result.Success();
+    }
+
+    public Result BestellungAusloesen()
+    {
+        if (VorgangsStatus == VorgangsStatus.Angebot)
+        {
+            VorgangsStatus = VorgangsStatus.Bestellung;
+            RaiseDomainEvent(new AngebotAkzeptiertDomainEvent(Guid.NewGuid(), Id));
+            return Result.Success();
+        }
+        return Result.Failure(new Error("VersicherungsVorgang.BestellungAusloesen", "Nur für Angebote kann eine Bestellung ausgelöst werden"));
     }
 
     public Result VersicherungsscheinAustellen()

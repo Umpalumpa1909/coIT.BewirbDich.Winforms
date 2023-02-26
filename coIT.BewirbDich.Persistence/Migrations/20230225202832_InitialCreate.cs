@@ -8,6 +8,31 @@ namespace coIT.BewirbDich.Persistence.Migrations
     public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Angebotsanfrage");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessageConsumers");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessages");
+
+            migrationBuilder.DropTable(
+                name: "VersicherungsKondidtionen");
+
+            migrationBuilder.DropTable(
+                name: "Versicherungsschein");
+
+            migrationBuilder.DropTable(
+                name: "VersicherungsVorgang");
+
+            migrationBuilder.DropSequence(
+                name: "VersicherungsscheinSequence");
+        }
+
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateSequence(
@@ -124,31 +149,6 @@ namespace coIT.BewirbDich.Persistence.Migrations
                 table: "Versicherungsschein",
                 column: "Id",
                 unique: true);
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Angebotsanfrage");
-
-            migrationBuilder.DropTable(
-                name: "OutboxMessageConsumers");
-
-            migrationBuilder.DropTable(
-                name: "OutboxMessages");
-
-            migrationBuilder.DropTable(
-                name: "VersicherungsKondidtionen");
-
-            migrationBuilder.DropTable(
-                name: "Versicherungsschein");
-
-            migrationBuilder.DropTable(
-                name: "VersicherungsVorgang");
-
-            migrationBuilder.DropSequence(
-                name: "VersicherungsscheinSequence");
         }
     }
 }

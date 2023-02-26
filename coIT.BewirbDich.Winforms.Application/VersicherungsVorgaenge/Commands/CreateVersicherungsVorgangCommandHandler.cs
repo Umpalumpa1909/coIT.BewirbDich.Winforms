@@ -7,8 +7,8 @@ namespace coIT.BewirbDich.Application.VersicherungsVorgaenge.Commands;
 
 internal sealed class CreateVersicherungsVorgangCommandHandler : ICommandHandler<CreateVersicherungsVorgangCommand, Guid>
 {
-    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
     private readonly IUnitOfWork unitOfWork;
+    private readonly IVersicherungsVorgangRepository versicherungsVorgangRepository;
 
     public CreateVersicherungsVorgangCommandHandler(
         IVersicherungsVorgangRepository versicherungsVorgangRepository

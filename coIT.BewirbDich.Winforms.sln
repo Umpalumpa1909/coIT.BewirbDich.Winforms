@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{618AB8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7C071733-C3C2-4C2A-B505-3EB36977F6BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coIT.BewirbDich.Presentation", "coIT.BewirbDich.Presentation\coIT.BewirbDich.Presentation.csproj", "{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{4780ECB5-F636-4147-B82E-93D97716099F} = {618AB8A6-F577-4CB3-904F-7EDA7B490383}
 		{9DF0FA03-8B76-4B37-9180-42E93F4B1786} = {618AB8A6-F577-4CB3-904F-7EDA7B490383}
 		{4E198367-F5F9-4DA6-84BB-ED7391D5EEC8} = {618AB8A6-F577-4CB3-904F-7EDA7B490383}
+		{AB3964B8-D40E-4114-ABA3-C638BF7B3AB8} = {618AB8A6-F577-4CB3-904F-7EDA7B490383}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8990642A-AB80-41CC-B15D-AD2510FD08A0}

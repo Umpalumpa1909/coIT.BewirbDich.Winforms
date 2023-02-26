@@ -26,45 +26,15 @@ public sealed class Angebotsanfrage : Entity
     }
 
     public int AnzahlMitarbeiter { get; set; }
-    public decimal Versicherungssumme { get; private set; }
-    public bool InkludiereZusatzschutz { get; private set; }
-    public decimal ZusatzschutzAufschlag { get; private set; }
+    public Berechnungsart Berechnungsart { get; private set; }
 
     //Gibt es nur bei Unternehmen, die nach Umsatz abgerechnet werden
     public bool HatWebshop { get; private set; }
 
+    public bool InkludiereZusatzschutz { get; private set; }
     public Risiko Risiko { get; private set; }
-
-    public Berechnungsart Berechnungsart { get; private set; }
-
-    private Result Validiere()
-    {
-        switch (Berechnungsart)
-        {
-            case Berechnungsart.Umsatz:
-                break;
-
-            case Berechnungsart.Haushaltssumme:
-                if (Risiko != Risiko.Mittel)
-                {
-                    return Result.Failure(new Error("Angebotsanfrage.Validiere",
-                        "Versicherungsnehmer, die nach Haushaltssumme versichert werden (primär Vereine) stellen immer ein mittleres Risiko da"));
-                }
-                break;
-
-            case Berechnungsart.AnzahlMitarbeiter:
-                if (AnzahlMitarbeiter > 5)
-                {
-                    return Result.Failure(new Error("Angebotsanfrage.Validiere",
-                        "Versicherungsnehmer, die nach Anzahl Mitarbeiter abgerechnet werden und mehr als 5 Mitarbeiter haben, können kein Lösegeld absichern"));
-                }
-                break;
-
-            default:
-                return Result.Failure(DomainErrors.Angebotsanfrage.ErstelleDokumentUnbekannteBerechnungsart);
-        }
-        return Result.Success();
-    }
+    public decimal Versicherungssumme { get; private set; }
+    public decimal ZusatzschutzAufschlag { get; private set; }
 
     public Result<VersicherungsKonditionen> BerechneKonditionen()
     {
@@ -90,30 +60,21 @@ public sealed class Angebotsanfrage : Entity
         }
     }
 
-    private decimal BerechneWebShopAufschlag(decimal beitrag)
+    private VersicherungsKonditionen BerechneAnzahlMitarbeiter()
     {
-        if (!HatWebshop)
-            return 0m;
-        switch (Berechnungsart)
-        {
-            case Berechnungsart.Umsatz:
-                return beitrag;
-
-            default:
-                return 0m;
-        }
+        decimal beitrag;
+        if (AnzahlMitarbeiter < 4)
+            beitrag = AnzahlMitarbeiter * 250m;
+        else
+            beitrag = AnzahlMitarbeiter * 200m;
+        return ErstelleDokument(AnzahlMitarbeiter, beitrag);
     }
 
-    private decimal BerechneZusatzschutzAufschlag(decimal beitrag)
+    private VersicherungsKonditionen BerechneHaushaltssumme()
     {
-        if (InkludiereZusatzschutz)
-        {
-            // Hier bin ich mir nicht sicher ob die Berechnung verändert werden soll als Aufgabe
-            // habe es so verändert das der Prozentwert genutzt wird.
-            //return beitrag * 1.0m + this.ZusatzschutzAufschlag / 100.0m;
-            return beitrag * ZusatzschutzAufschlag / 100.0m;
-        }
-        return 0m;
+        var berechnungbasis = (decimal)Math.Log10((double)Versicherungssumme);
+        var beitrag = 1.0m * berechnungbasis + 100m;
+        return ErstelleDokument(berechnungbasis, beitrag);
     }
 
     private decimal BerechneRisikoAuschlag(decimal beitrag)
@@ -148,21 +109,30 @@ public sealed class Angebotsanfrage : Entity
         return ErstelleDokument(berechnungbasis, beitrag);
     }
 
-    private VersicherungsKonditionen BerechneHaushaltssumme()
+    private decimal BerechneWebShopAufschlag(decimal beitrag)
     {
-        var berechnungbasis = (decimal)Math.Log10((double)Versicherungssumme);
-        var beitrag = 1.0m * berechnungbasis + 100m;
-        return ErstelleDokument(berechnungbasis, beitrag);
+        if (!HatWebshop)
+            return 0m;
+        switch (Berechnungsart)
+        {
+            case Berechnungsart.Umsatz:
+                return beitrag;
+
+            default:
+                return 0m;
+        }
     }
 
-    private VersicherungsKonditionen BerechneAnzahlMitarbeiter()
+    private decimal BerechneZusatzschutzAufschlag(decimal beitrag)
     {
-        decimal beitrag;
-        if (AnzahlMitarbeiter < 4)
-            beitrag = AnzahlMitarbeiter * 250m;
-        else
-            beitrag = AnzahlMitarbeiter * 200m;
-        return ErstelleDokument(AnzahlMitarbeiter, beitrag);
+        if (InkludiereZusatzschutz)
+        {
+            // Hier bin ich mir nicht sicher ob die Berechnung verändert werden soll als Aufgabe
+            // habe es so verändert das der Prozentwert genutzt wird.
+            //return beitrag * 1.0m + this.ZusatzschutzAufschlag / 100.0m;
+            return beitrag * ZusatzschutzAufschlag / 100.0m;
+        }
+        return 0m;
     }
 
     // TODO guten namen hierfür ausdenken
@@ -186,5 +156,34 @@ public sealed class Angebotsanfrage : Entity
                             webShopAufschlag,
                             zusatzschutzAufschlagErrechnet,
                             risikoAufschlag);
+    }
+
+    private Result Validiere()
+    {
+        switch (Berechnungsart)
+        {
+            case Berechnungsart.Umsatz:
+                break;
+
+            case Berechnungsart.Haushaltssumme:
+                if (Risiko != Risiko.Mittel)
+                {
+                    return Result.Failure(new Error("Angebotsanfrage.Validiere",
+                        "Versicherungsnehmer, die nach Haushaltssumme versichert werden (primär Vereine) stellen immer ein mittleres Risiko da"));
+                }
+                break;
+
+            case Berechnungsart.AnzahlMitarbeiter:
+                if (AnzahlMitarbeiter > 5)
+                {
+                    return Result.Failure(new Error("Angebotsanfrage.Validiere",
+                        "Versicherungsnehmer, die nach Anzahl Mitarbeiter abgerechnet werden und mehr als 5 Mitarbeiter haben, können kein Lösegeld absichern"));
+                }
+                break;
+
+            default:
+                return Result.Failure(DomainErrors.Angebotsanfrage.ErstelleDokumentUnbekannteBerechnungsart);
+        }
+        return Result.Success();
     }
 }

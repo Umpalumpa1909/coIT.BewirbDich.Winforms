@@ -5,6 +5,10 @@ namespace coIT.BewirbDich.Winforms.UI;
 public partial class Form_Kalkulationen : Form
 {
     private BindingSource _kalkulationen;
+
+    private List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge
+        = new List<VersicherungsVorgangResponse>();
+
     private VersicherungsVorgangClient client;
 
     public Form_Kalkulationen()
@@ -13,14 +17,14 @@ public partial class Form_Kalkulationen : Form
         InitializeComponent();
     }
 
-    private async void ctr_NeueKalkulation_Click(object sender, EventArgs e)
+    private VersicherungsVorgangResponse? AuswahlEinlesen()
     {
-        var neueKalkulationForm = new Form_NeueKalkulation();
-        var dialog = neueKalkulationForm.ShowDialog();
-        if (dialog == DialogResult.OK)
-        {
-            await CreateNewCalculation(neueKalkulationForm);
-        }
+        var rowsCount = ctrl_ListeKalkulationen.SelectedRows.Count;
+        if (rowsCount == 0 || rowsCount > 1) return null;
+        var zeile = ctrl_ListeKalkulationen.SelectedRows[0];
+        if (zeile?.DataBoundItem == null) return null;
+        var kalkulation = (VersicherungsVorgangResponse)zeile.DataBoundItem;
+        return kalkulation;
     }
 
     private async Task CreateNewCalculation(Form_NeueKalkulation neueKalkulationForm)
@@ -40,43 +44,19 @@ public partial class Form_Kalkulationen : Form
         }
     }
 
-    private void ctrl_ListeKalkulationen_SelectionChanged(object sender, EventArgs e)
+    private async void ctr_NeueKalkulation_Click(object sender, EventArgs e)
     {
-        var kalkulation = AuswahlEinlesen();
-
-        if (kalkulation == null)
-            return;
-
-        OptionenAnzeigen(kalkulation);
+        var neueKalkulationForm = new Form_NeueKalkulation();
+        var dialog = neueKalkulationForm.ShowDialog();
+        if (dialog == DialogResult.OK)
+        {
+            await CreateNewCalculation(neueKalkulationForm);
+        }
     }
 
-    private void OptionenAnzeigen(VersicherungsVorgangResponse versicherungsvorgang)
+    private async void ctrl_Aktualisieren_Click(object sender, EventArgs e)
     {
-        ctrl_VersicherungsscheinAusstellen.Enabled = false;
-        ctrl_AngebotAnnehmen.Enabled = false;
-        ctrl_AngebotLoeschen.Enabled = false;
-
-        switch (versicherungsvorgang.VorgangsStatus)
-        {
-            case VorgangsStatus.Angebot:
-                ctrl_AngebotAnnehmen.Enabled = true;
-                ctrl_AngebotLoeschen.Enabled = true;
-                break;
-
-            case VorgangsStatus.Bestellung:
-            case VorgangsStatus.Lieferschein:
-                break;
-
-            case VorgangsStatus.Abgelehnt:
-                ctrl_AngebotLoeschen.Enabled = true;
-                break;
-
-            case VorgangsStatus.Auftragsbestaetigung:
-                ctrl_VersicherungsscheinAusstellen.Enabled = true;
-                break;
-
-            default: throw new InvalidDataException("Unbekannter Dokumenttyp");
-        }
+        await LadeVersicherungsVorgaenge();
     }
 
     private async void ctrl_AngebotAnnehmen_Click(object sender, EventArgs e)
@@ -109,6 +89,50 @@ public partial class Form_Kalkulationen : Form
         });
     }
 
+    private async void ctrl_AngebotLoeschen_Click(object sender, EventArgs e)
+    {
+        var kalkulation = AuswahlEinlesen();
+        if (kalkulation == null)
+            return;
+        try
+        {
+            await client.VersicherungsVorgangLoeschenAsync(kalkulation.Id);
+            _kalkulationen.Remove(kalkulation);
+            OptionenAnzeigen(kalkulation);
+        }
+        catch (Exception error)
+        {
+            MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            throw;
+        }
+    }
+
+    private async void ctrl_Lieferscheine_Click(object sender, EventArgs e)
+    {
+        int abrufAbNr = 0;
+        if (abgeschlosseneVersicherungsvorgaenge.Any())
+        {
+            abrufAbNr = abgeschlosseneVersicherungsvorgaenge.Max(x => x.Versicherungsnummer!.Value);
+        }
+        var result = await client.GetBeendeteVersicherungsVorgaengeAsync(
+            new GetBeendeteVersicherungsVorgaengeQuery()
+            { AbVersicherungsnummer = abrufAbNr });
+        abgeschlosseneVersicherungsvorgaenge.AddRange(result.Versicherungsvorgaenge.ToList());
+
+        Form_Lieferscheine form_Lieferscheine = new Form_Lieferscheine(abgeschlosseneVersicherungsvorgaenge);
+        form_Lieferscheine.Show();
+    }
+
+    private void ctrl_ListeKalkulationen_SelectionChanged(object sender, EventArgs e)
+    {
+        var kalkulation = AuswahlEinlesen();
+
+        if (kalkulation == null)
+            return;
+
+        OptionenAnzeigen(kalkulation);
+    }
+
     private async void ctrl_VersicherungsscheinAusstellen_Click(object sender, EventArgs e)
     {
         var kalkulation = AuswahlEinlesen();
@@ -122,14 +146,9 @@ public partial class Form_Kalkulationen : Form
             "Vorgang", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
-    private VersicherungsVorgangResponse? AuswahlEinlesen()
+    private async void Form1_Load(object sender, EventArgs e)
     {
-        var rowsCount = ctrl_ListeKalkulationen.SelectedRows.Count;
-        if (rowsCount == 0 || rowsCount > 1) return null;
-        var zeile = ctrl_ListeKalkulationen.SelectedRows[0];
-        if (zeile?.DataBoundItem == null) return null;
-        var kalkulation = (VersicherungsVorgangResponse)zeile.DataBoundItem;
-        return kalkulation;
+        await LadeVersicherungsVorgaenge();
     }
 
     private async Task LadeVersicherungsVorgaenge()
@@ -161,50 +180,32 @@ public partial class Form_Kalkulationen : Form
         _kalkulationen.ResetBindings(false);
     }
 
-    private async void Form1_Load(object sender, EventArgs e)
+    private void OptionenAnzeigen(VersicherungsVorgangResponse versicherungsvorgang)
     {
-        await LadeVersicherungsVorgaenge();
-    }
+        ctrl_VersicherungsscheinAusstellen.Enabled = false;
+        ctrl_AngebotAnnehmen.Enabled = false;
+        ctrl_AngebotLoeschen.Enabled = false;
 
-    private async void ctrl_AngebotLoeschen_Click(object sender, EventArgs e)
-    {
-        var kalkulation = AuswahlEinlesen();
-        if (kalkulation == null)
-            return;
-        try
+        switch (versicherungsvorgang.VorgangsStatus)
         {
-            await client.VersicherungsVorgangLoeschenAsync(kalkulation.Id);
-            _kalkulationen.Remove(kalkulation);
-            OptionenAnzeigen(kalkulation);
+            case VorgangsStatus.Angebot:
+                ctrl_AngebotAnnehmen.Enabled = true;
+                ctrl_AngebotLoeschen.Enabled = true;
+                break;
+
+            case VorgangsStatus.Bestellung:
+            case VorgangsStatus.Lieferschein:
+                break;
+
+            case VorgangsStatus.Abgelehnt:
+                ctrl_AngebotLoeschen.Enabled = true;
+                break;
+
+            case VorgangsStatus.Auftragsbestaetigung:
+                ctrl_VersicherungsscheinAusstellen.Enabled = true;
+                break;
+
+            default: throw new InvalidDataException("Unbekannter Dokumenttyp");
         }
-        catch (Exception error)
-        {
-            MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            throw;
-        }
-    }
-
-    private async void ctrl_Aktualisieren_Click(object sender, EventArgs e)
-    {
-        await LadeVersicherungsVorgaenge();
-    }
-
-    private List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge
-        = new List<VersicherungsVorgangResponse>();
-
-    private async void ctrl_Lieferscheine_Click(object sender, EventArgs e)
-    {
-        int abrufAbNr = 0;
-        if (abgeschlosseneVersicherungsvorgaenge.Any())
-        {
-            abrufAbNr = abgeschlosseneVersicherungsvorgaenge.Max(x => x.Versicherungsnummer!.Value);
-        }
-        var result = await client.GetBeendeteVersicherungsVorgaengeAsync(
-            new GetBeendeteVersicherungsVorgaengeQuery()
-            { AbVersicherungsnummer = abrufAbNr });
-        abgeschlosseneVersicherungsvorgaenge.AddRange(result.Versicherungsvorgaenge.ToList());
-
-        Form_Lieferscheine form_Lieferscheine = new Form_Lieferscheine(abgeschlosseneVersicherungsvorgaenge);
-        form_Lieferscheine.Show();
     }
 }
