@@ -84,6 +84,7 @@ public partial class Form_Kalkulationen : Form
                         _kalkulationen.ResetBindings(false);
                         OptionenAnzeigen(kalkulation);
                     });
+                    return;
                 }
             }
         });
@@ -107,22 +108,6 @@ public partial class Form_Kalkulationen : Form
         }
     }
 
-    private async void ctrl_Lieferscheine_Click(object sender, EventArgs e)
-    {
-        int abrufAbNr = 0;
-        if (abgeschlosseneVersicherungsvorgaenge.Any())
-        {
-            abrufAbNr = abgeschlosseneVersicherungsvorgaenge.Max(x => x.Versicherungsnummer!.Value);
-        }
-        var result = await client.GetBeendeteVersicherungsVorgaengeAsync(
-            new GetBeendeteVersicherungsVorgaengeQuery()
-            { AbVersicherungsnummer = abrufAbNr });
-        abgeschlosseneVersicherungsvorgaenge.AddRange(result.Versicherungsvorgaenge.ToList());
-
-        Form_Lieferscheine form_Lieferscheine = new Form_Lieferscheine(abgeschlosseneVersicherungsvorgaenge);
-        form_Lieferscheine.Show();
-    }
-
     private void ctrl_ListeKalkulationen_SelectionChanged(object sender, EventArgs e)
     {
         var kalkulation = AuswahlEinlesen();
@@ -139,11 +124,28 @@ public partial class Form_Kalkulationen : Form
         if (kalkulation == null)
             return;
         await client.VersicherungsscheinAustellenAsync(kalkulation.Id);
-
+        _kalkulationen.Remove(kalkulation);
+        _kalkulationen.ResetBindings(true);
         OptionenAnzeigen(kalkulation);
 
         MessageBox.Show("Der Versicherungsschein wurde an den Versicherungsnehmer verschickt.",
             "Vorgang", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private async void ctrl_Versicherungsscheine_Click(object sender, EventArgs e)
+    {
+        int abrufAbNr = 0;
+        if (abgeschlosseneVersicherungsvorgaenge.Any())
+        {
+            abrufAbNr = abgeschlosseneVersicherungsvorgaenge.Max(x => x.Versicherungsnummer!.Value);
+        }
+        var result = await client.GetBeendeteVersicherungsVorgaengeAsync(
+            new GetBeendeteVersicherungsVorgaengeQuery()
+            { AbVersicherungsnummer = abrufAbNr });
+        abgeschlosseneVersicherungsvorgaenge.AddRange(result.Versicherungsvorgaenge.ToList());
+
+        Form_Versicherungsscheine form_Versicherungsscheine = new Form_Versicherungsscheine(abgeschlosseneVersicherungsvorgaenge);
+        form_Versicherungsscheine.Show();
     }
 
     private async void Form1_Load(object sender, EventArgs e)
@@ -191,7 +193,7 @@ public partial class Form_Kalkulationen : Form
                 break;
 
             case VorgangsStatus.Bestellung:
-            case VorgangsStatus.Lieferschein:
+            case VorgangsStatus.Versicherungsschein:
                 break;
 
             case VorgangsStatus.Abgelehnt:

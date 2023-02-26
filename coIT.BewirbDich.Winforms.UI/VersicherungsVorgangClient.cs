@@ -795,7 +795,7 @@ namespace ApiClient
 
         Auftragsbestaetigung = 4,
 
-        Lieferschein = 5,
+        Versicherungsschein = 5,
 
     }
 

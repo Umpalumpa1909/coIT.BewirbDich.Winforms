@@ -6,7 +6,7 @@ public static class ToVersicherungsVorgangResponseExtension
 {
     public static VersicherungsVorgangResponse ToVersicherungsvorgangResponse(this VersicherungsVorgang versicherungsVorgang)
     {
-        if (versicherungsVorgang.VorgangsStatus == Domain.Enums.VorgangsStatus.Lieferschein)
+        if (versicherungsVorgang.VorgangsStatus == Domain.Enums.VorgangsStatus.Versicherungsschein)
         {
             return new VersicherungsVorgangResponse(versicherungsVorgang.Id,
            versicherungsVorgang.VorgangsStatus,

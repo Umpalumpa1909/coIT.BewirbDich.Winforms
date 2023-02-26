@@ -1,6 +1,6 @@
 ﻿namespace coIT.BewirbDich.Winforms.UI;
 
-partial class Form_Lieferscheine
+partial class Form_Versicherungsscheine
 {
     /// <summary>
     ///  Required designer variable.
@@ -49,17 +49,17 @@ partial class Form_Lieferscheine
             this.ctrl_ListeKalkulationen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ctrl_ListeKalkulationen.Size = new System.Drawing.Size(1184, 424);
             this.ctrl_ListeKalkulationen.TabIndex = 1;
-            // 
-            // Form_Lieferscheine
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        // 
+        // Form_Versicherungsscheine
+        // 
+        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 450);
             this.Controls.Add(this.ctrl_ListeKalkulationen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form_Lieferscheine";
+            this.Name = "Form_Versicherungsscheine";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Deine Bewerbung";

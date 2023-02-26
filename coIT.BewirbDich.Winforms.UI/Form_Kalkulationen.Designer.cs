@@ -35,7 +35,7 @@ partial class Form_Kalkulationen
             this.ctrl_VersicherungsscheinAusstellen = new System.Windows.Forms.Button();
             this.ctrl_AngebotLoeschen = new System.Windows.Forms.Button();
             this.ctrl_Aktualisieren = new System.Windows.Forms.Button();
-            this.ctrl_Lieferscheine = new System.Windows.Forms.Button();
+            this.ctrl_VersicherungScheine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ctrl_ListeKalkulationen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,22 +110,22 @@ partial class Form_Kalkulationen
             this.ctrl_Aktualisieren.UseVisualStyleBackColor = true;
             this.ctrl_Aktualisieren.Click += new System.EventHandler(this.ctrl_Aktualisieren_Click);
             // 
-            // ctrl_Lieferscheine
+            // ctrl_VersicherungScheine
             // 
-            this.ctrl_Lieferscheine.Location = new System.Drawing.Point(393, 12);
-            this.ctrl_Lieferscheine.Name = "ctrl_Lieferscheine";
-            this.ctrl_Lieferscheine.Size = new System.Drawing.Size(94, 41);
-            this.ctrl_Lieferscheine.TabIndex = 7;
-            this.ctrl_Lieferscheine.Text = "Lieferscheine";
-            this.ctrl_Lieferscheine.UseVisualStyleBackColor = true;
-            this.ctrl_Lieferscheine.Click += new System.EventHandler(this.ctrl_Lieferscheine_Click);
+            this.ctrl_VersicherungScheine.Location = new System.Drawing.Point(393, 12);
+            this.ctrl_VersicherungScheine.Name = "ctrl_VersicherungScheine";
+            this.ctrl_VersicherungScheine.Size = new System.Drawing.Size(187, 41);
+            this.ctrl_VersicherungScheine.TabIndex = 7;
+            this.ctrl_VersicherungScheine.Text = "Versicherungscheine";
+            this.ctrl_VersicherungScheine.UseVisualStyleBackColor = true;
+            this.ctrl_VersicherungScheine.Click += new System.EventHandler(this.ctrl_Versicherungsscheine_Click);
             // 
             // Form_Kalkulationen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 450);
-            this.Controls.Add(this.ctrl_Lieferscheine);
+            this.Controls.Add(this.ctrl_VersicherungScheine);
             this.Controls.Add(this.ctrl_Aktualisieren);
             this.Controls.Add(this.ctrl_AngebotLoeschen);
             this.Controls.Add(this.ctrl_VersicherungsscheinAusstellen);
@@ -153,5 +153,5 @@ partial class Form_Kalkulationen
     private Button ctrl_VersicherungsscheinAusstellen;
     private Button ctrl_AngebotLoeschen;
     private Button ctrl_Aktualisieren;
-    private Button ctrl_Lieferscheine;
+    private Button ctrl_VersicherungScheine;
 }

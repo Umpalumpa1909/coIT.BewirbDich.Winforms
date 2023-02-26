@@ -68,7 +68,7 @@ public class VersicherungsVorgang : AggregateRoot
         if (VorgangsStatus == VorgangsStatus.Auftragsbestaetigung)
         {
             Versicherungsschein = new Versicherungsschein(Guid.NewGuid());
-            VorgangsStatus = VorgangsStatus.Lieferschein;
+            VorgangsStatus = VorgangsStatus.Versicherungsschein;
             return Result.Success();
         }
 

@@ -22,7 +22,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
     public async Task DeleteById(Guid id, CancellationToken cancellationToken)
     {
         var result = await GetByIdAsync(id, cancellationToken);
-        if (result != null)
+        if (result is not null)
         {
             dbContext.Set<VersicherungsVorgang>().Remove(result);
         }
@@ -37,7 +37,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
             .Include(x => x.BerechungsParameter)
             .Include(x => x.VersicherungsKonditionen)
             .Include(x => x.Versicherungsschein)
-            .Where(x => x.VorgangsStatus == VorgangsStatus.Lieferschein &&
+            .Where(x => x.VorgangsStatus == VorgangsStatus.Versicherungsschein &&
              x.Versicherungsschein!.Versicherungsnummer! > ablfd)
             .ToListAsync(cancellationToken);
     }
@@ -56,7 +56,7 @@ public sealed class VersicherungsVorgangRepository : IVersicherungsVorgangReposi
         return await dbContext.Set<VersicherungsVorgang>()
             .Include(x => x.BerechungsParameter)
             .Include(x => x.VersicherungsKonditionen)
-            .Where(x => x.VorgangsStatus != VorgangsStatus.Lieferschein)
+            .Where(x => x.VorgangsStatus != VorgangsStatus.Versicherungsschein)
             .ToListAsync(cancellationToken);
     }
 }

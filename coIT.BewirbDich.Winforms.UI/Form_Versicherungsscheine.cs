@@ -2,12 +2,12 @@ using ApiClient;
 
 namespace coIT.BewirbDich.Winforms.UI;
 
-public partial class Form_Lieferscheine : Form
+public partial class Form_Versicherungsscheine : Form
 {
     private readonly List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge;
-    private BindingSource lieferscheine;
+    private BindingSource versicherungsscheine;
 
-    public Form_Lieferscheine(List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge)
+    public Form_Versicherungsscheine(List<VersicherungsVorgangResponse> abgeschlosseneVersicherungsvorgaenge)
     {
         this.abgeschlosseneVersicherungsvorgaenge = abgeschlosseneVersicherungsvorgaenge;
         InitializeComponent();
@@ -17,11 +17,11 @@ public partial class Form_Lieferscheine : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        lieferscheine = new BindingSource
+        versicherungsscheine = new BindingSource
         {
             DataSource = abgeschlosseneVersicherungsvorgaenge
         };
-        ctrl_ListeKalkulationen.DataSource = lieferscheine;
+        ctrl_ListeKalkulationen.DataSource = versicherungsscheine;
         ctrl_ListeKalkulationen.ColumnHeadersVisible = true;
         ctrl_ListeKalkulationen.AutoGenerateColumns = true;
         ctrl_ListeKalkulationen.Columns[nameof(VersicherungsVorgangResponse.Id)].Visible = false;
@@ -33,6 +33,6 @@ public partial class Form_Lieferscheine : Form
         ctrl_ListeKalkulationen.AutoResizeColumns();
         ctrl_ListeKalkulationen.AutoSize = true;
 
-        lieferscheine.ResetBindings(false);
+        versicherungsscheine.ResetBindings(false);
     }
 }

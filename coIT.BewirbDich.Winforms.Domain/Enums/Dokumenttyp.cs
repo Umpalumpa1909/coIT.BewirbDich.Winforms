@@ -6,5 +6,5 @@ public enum VorgangsStatus
     Bestellung = 2,
     Abgelehnt = 3,
     Auftragsbestaetigung = 4,
-    Lieferschein = 5,
+    Versicherungsschein = 5,
 }
