@@ -1,0 +1,3 @@
+﻿namespace coIT.BewirbDich.Winforms.Application.VersicherungsVorgaenge.Queries;
+
+public sealed record VersicherungsVorgaengeResponse(List<VersicherungsVorgangResponse> Versicherungsvorgaenge);
